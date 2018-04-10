@@ -7,11 +7,10 @@ using namespace std;
 
 class Member {
 private:
-	string name;
+    string name;
     static int memberCount;
     map<string, Member> *followingList;
     map<string, Member> *followersList;
-	bool created;
 public:
     Member();
     ~Member();
@@ -19,7 +18,7 @@ public:
     int numFollowing();
     void follow(Member &member);
     void unfollow(Member &member);
-	static int count();
+    static int count();
 };
 
 #endif 
