@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#include "MemberUsingMaps.cpp"
+#include "Member.h"
 
 
 Member avi, beni, chana;
@@ -33,5 +33,5 @@ int main() {
 	test1();
 	cout << chana.numFollowers() << " " <<  chana.numFollowing() << endl; // 0 0
 	cout << avi.numFollowers() << " " <<  avi.numFollowing() << endl; // 0 0
-	//cout << Member::count() << endl; // 3
+	cout << Member::count() << endl; // 3
 }
