@@ -8,7 +8,6 @@ using namespace std;
 class Member {
 private:
 	string name;
-    static int memberCount;
     map<string, Member> *followingList;
     map<string, Member> *followersList;
 public:
