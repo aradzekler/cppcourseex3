@@ -10,21 +10,17 @@ Member::Member() {
     followingList = new map<string, Member>;
     followersList = new map<string, Member>;
     memberCount++;
-    created = true; // telling if the object is 'original'
 }
 
 
 Member::~Member(){
-    if (this->created) {
         memberCount--;
-        this->followingList->clear();
-        this->followersList->clear();
-    }
+        //this->followingList->clear();
+        //this->followersList->clear();
 
 }
 
 void Member::follow(Member &member) {
-    member.created = false;
     if (this->followingList->find(member.name) != this->followingList->end()) {
         return;
     }
@@ -35,7 +31,6 @@ void Member::follow(Member &member) {
 }
 
 void Member::unfollow(Member &member) {
-    member.created = false;
     if (this->followingList->find(member.name) != this->followingList->end()) {
         this->followingList->erase(member.name);
         member.followersList->erase(this->name);
@@ -55,4 +50,3 @@ int Member::numFollowers() {
 int Member::count() {
     return memberCount;
 }
-    
