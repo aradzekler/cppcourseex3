@@ -2,23 +2,23 @@
 #ifndef MEMBER
 #define MEMBER
 #include <iostream>
-#include <map>
+#include <vector>
 using namespace std;
 
 class Member {
 private:
 	string name;
-    map<string, Member> *followingList;
-    map<string, Member> *followersList;
+    vector<Member*> followingList; // vectors hold following and followers.
+    vector<Member*> followersList;
 public:
-	static int memberCount;
+	static int memberCount; // static for counting total objects.
+	static int count();
     Member();
     ~Member();
-    int numFollowers();
-    int numFollowing();
     void follow(Member &member);
     void unfollow(Member &member);
-	static int count();
+	int numFollowing();
+    int numFollowers();
 };
 
 #endif 
