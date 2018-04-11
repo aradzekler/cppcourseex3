@@ -21,15 +21,13 @@ Member::~Member(){
 }
 
 void Member::follow(Member &member) {
+    if (member.id == id) {
+        return;
+    }
     for(int i = 0; i < followingList.size(); i++) {
-       if ((followingList[i]->id) == (member.id) || (followingList[i]->id == id)) { // if already exists.
+       if ((followingList[i]->id) == (member.id)) { // if already exists.
         return;
          }
-    }
-    for (int i = 0; i < member.followersList.size(); i++) {
-        if (member.followersList[i]->id == id) {
-            return;
-        }
     }
     followingList.push_back(&member);      // add to lists.
     member.followersList.push_back(this);
