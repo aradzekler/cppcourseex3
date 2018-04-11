@@ -21,7 +21,7 @@ Member::~Member(){
 }
 
 void Member::follow(Member &member) {
-    if (member.id == id) {
+    if (member.id == id) { // checks if following self.
         return;
     }
     for(int i = 0; i < followingList.size(); i++) {
