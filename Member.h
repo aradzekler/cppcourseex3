@@ -7,17 +7,19 @@ using namespace std;
 
 class Member {
 private:
-    string name;
+	string name;
+	int id; // unique object id.
     vector<Member*> followingList; // vectors hold following and followers.
     vector<Member*> followersList;
 public:
-    static int memberCount; // static for counting total objects.
-    static int count();
+	static int memberCount; // static for counting total objects.
+	static int idCounter; 
+	static int count();
     Member();
     ~Member();
     void follow(Member &member);
     void unfollow(Member &member);
-    int numFollowing();
+	int numFollowing();
     int numFollowers();
 };
 
