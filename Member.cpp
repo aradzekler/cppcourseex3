@@ -13,7 +13,7 @@ int Member::count() {
 }
 
 Member::Member() {
-    id = idCounter;
+    id = ++memberCount;
     idCounter++;
     onlineUsers.push_back(memberCount);
     memberCount++; // every obj creation adds to counter.
@@ -24,30 +24,23 @@ Member::~Member(){
     memberCount--;
 }
 
-void Member::follow(Member &member) {
-    if (member.id == id) {
-        return;
-    }
-    for(int i = 0; i < followingList.size(); i++) {
-       if ((followingList[i]->id) == (member.id)) { // if already exists.
-        return;
-         }
-    }
-    followingList.push_back(&member);      // add to lists.
-    member.followersList.push_back(this);
+void Member::follow(Member& member) {
+       if (find(followingList.begin(),followingList.end(), member.id) == followingList.end()) {
+            followingList.push_back(member.id);
+            member.followersList.push_back(id);
+     }
 }
+
 // unfollows (takes care of both lists)
-void Member::unfollow(Member &member) {
-    for (int i = 0; i < followingList.size(); i++) {
-        if(followingList[i] == &member) {
-            followingList.erase(followingList.begin()+i);
-            break;
+void Member::unfollow(Member& member) {
+    for (int i = 0; i<followingList.size(); i++) {
+        if(followingList[i] == member.id) {
+            followingList.erase(followingList.begin() +i); 
         }
     }
-    for(int i = 0; i<followersList.size(); i++) {
-        if(followersList[i] == &member) {
-            followersList.erase(followersList.begin()+i);
-            break;
+    for (int i = 0; i<member.followersList.size(); i++) {
+        if (member.followersList[i] == id) {
+            member.followersList.erase(member.followersList.begin() +i);
         }
     }
 }
