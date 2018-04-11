@@ -1,52 +1,53 @@
 #include <iostream>
-#include <map>
+#include <vector>
 #include "Member.h"
 using namespace std;
 
 int Member::memberCount = 0;
 
-
-Member::Member() {
-    followingList = new map<string, Member>;
-    followersList = new map<string, Member>;
-    memberCount++;
+int Member::count() {
+    return memberCount;
 }
 
+Member::Member() {
+    memberCount++; // every obj creation adds to counter.
+}
 
 Member::~Member(){
-        memberCount--;
-        //this->followingList->clear();
-        //this->followersList->clear();
-
+    memberCount--;
 }
 
 void Member::follow(Member &member) {
-    if (this->followingList->find(member.name) != this->followingList->end()) {
+    for(int i =0; i < followingList.size(); i++) {
+       if ((followingList[i]->name) == (member.name)) { // if already exists.
         return;
+         }
     }
-    else {
-        this->followingList->insert(make_pair(member.name, member));
-        member.followersList->insert(make_pair(this->name, member)); // adds this name to members followers list.
-    }
+    followingList.push_back(&member);      // add to lists.
+    member.followersList.push_back(this);
 }
-
+// unfollows (takes care of both lists)
 void Member::unfollow(Member &member) {
-    if (this->followingList->find(member.name) != this->followingList->end()) {
-        this->followingList->erase(member.name);
-        member.followersList->erase(this->name);
+    for (int i = 0; i < followingList.size(); i++) {
+        if(followingList[i] == &member) {
+            followingList.erase(followingList.begin()+i);
+            break;
+        }
+    }
+    for(int i = 0; i<followersList.size(); i++) {
+        if(followersList[i] == &member) {
+            followersList.erase(followersList.begin()+i);
+            break;
+        }
     }
 }
 
 // return number of members this one is following.
 int Member::numFollowing() {
-    return this->followingList->size();
+    return followingList.size();
 }
 
 // returns number of followers.
 int Member::numFollowers() {
-    return this->followersList->size();
-}
-
-int Member::count() {
-    return memberCount;
+    return followersList.size();
 }
