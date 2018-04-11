@@ -4,12 +4,15 @@
 using namespace std;
 
 int Member::memberCount = 0;
+int Member::idCounter = 0;
 
 int Member::count() {
     return memberCount;
 }
 
 Member::Member() {
+    id = idCounter;
+    idCounter++;
     memberCount++; // every obj creation adds to counter.
 }
 
@@ -19,7 +22,7 @@ Member::~Member(){
 
 void Member::follow(Member &member) {
     for(int i =0; i < followingList.size(); i++) {
-       if ((followingList[i]->name) == (member.name)) { // if already exists.
+       if ((followingList[i]->id) == (member.id)) { // if already exists.
         return;
          }
     }
@@ -51,3 +54,4 @@ int Member::numFollowing() {
 int Member::numFollowers() {
     return followersList.size();
 }
+
