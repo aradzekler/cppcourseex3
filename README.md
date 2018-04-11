@@ -1,3 +1,3 @@
 # cppcourseex3
 
-C++ course exersize.
+C++ course exersice.
